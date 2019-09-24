@@ -1,6 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
+#include "Engine/World.h"
 #include "public/TankAimingComponent.h"
 #include "public/Tank.h"
 
@@ -43,4 +43,10 @@ void ATank::SetBarrelReference(UTankBarrel* BarrelToSet)
 void ATank::SetTurretReference(UTankTurret* BarrelToSet)
 {
 	TankAimingComponent->SetTurretReference(BarrelToSet);
+}
+
+void ATank::Fire()
+{
+	auto Time = GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Warning, TEXT("%f: Projectile Fired!"), Time);
 }
