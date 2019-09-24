@@ -3,6 +3,7 @@
 #include "Engine/World.h"
 #include "TankPlayerController.h"
 
+
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
@@ -35,8 +36,7 @@ void ATankPlayerController::AimTowardsCrosshair()
 	FVector HitLocation; //out param
 	if (GetSightRayHitLocation(HitLocation))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Hit Location %s"), *HitLocation.ToString());
-
+		GetControlledTank()->AimAt(HitLocation);
 	}
 }
 

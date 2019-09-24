@@ -3,7 +3,7 @@
 
 #include "public/TankAIController.h"
 #include "Engine/World.h"
-#include "Engine/Classes/GameFramework/Controller.h"
+#include "GameFramework/Controller.h"
 
 void ATankAIController::BeginPlay()
 {
@@ -19,6 +19,12 @@ void ATankAIController::BeginPlay()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Player Controlled Tank not Spotted by AI"));
 	}
+}
+
+void ATankAIController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
 }
 
 
