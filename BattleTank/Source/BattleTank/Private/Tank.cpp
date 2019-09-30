@@ -3,6 +3,7 @@
 #include "Engine/World.h"
 #include "Public/Projectile.h"
 #include "public/TankAimingComponent.h"
+#include "Public/TankMovementComponent.h"
 #include "Public/TankBarrel.h"
 #include "public/Tank.h"
 
