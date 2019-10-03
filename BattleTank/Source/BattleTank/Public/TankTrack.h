@@ -19,6 +19,6 @@ public:
 	void SetThrottle(float Throttle);
 
 	//Max force per track in newtons
-	UPROPERTY(EditDefaultsOnly)
-	float TrackMaxDrivingForce = 400000;
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	float TrackMaxDrivingForce = 40000000;
 };
