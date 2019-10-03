@@ -27,11 +27,12 @@ public:
 	//void SetBarrelReference(UTankBarrel* BarrelToSet);
 	//void SetTurretReference(UTankTurret* TurretToSet);
 
-	void AimAt(FVector HitLocation, float LaunchSpeed);
+	void AimAt(FVector HitLocation);
 
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 	
+	float LaunchSpeed = 4000;
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
@@ -45,5 +46,5 @@ private:
 	void MoveBarrelTowards(FVector AimDirection);
 	void MoveTurretTowards(FVector AimDirection);
 
-
+	
 };
