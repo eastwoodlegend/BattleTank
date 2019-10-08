@@ -10,6 +10,7 @@ void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
+	if (!GetPawn()) { return; }
 	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 	if (!ensure(AimingComponent)) { return; }
 
@@ -44,10 +45,10 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const
 	
 	if (GetLookDirection(ScreenLocation, LookDirection))
 	{
-		GetLookVectorHitLocation(LookDirection, HitLocation);
+		return GetLookVectorHitLocation(LookDirection, HitLocation);
 	}
 
-	return true;
+	return false;
 }
 
 
