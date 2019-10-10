@@ -1,27 +1,27 @@
+// Copyright EmbraceIT Ltd.
+
 #include "BattleTank.h"
-#include "tanktrack.h"
+#include "TankTrack.h"
 #include "TankMovementComponent.h"
 
-
-
-void UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack* RighTrackToSet)
+void UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet)
 {
-	
 	LeftTrack = LeftTrackToSet;
-	RightTrack = RighTrackToSet;
+	RightTrack = RightTrackToSet;
 }
 
 void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
 {
+	// No need to call Super as we're replacing the functionality
+
 	auto TankForward = GetOwner()->GetActorForwardVector().GetSafeNormal();
 	auto AIForwardIntention = MoveVelocity.GetSafeNormal();
 
-	auto TankDotProduct = FVector::DotProduct(TankForward, AIForwardIntention);
+	auto ForwardThrow = FVector::DotProduct(TankForward, AIForwardIntention);
+	IntendMoveForward(ForwardThrow);
 
-	IntendMoveForward(TankDotProduct);
-
-	auto TankCrossProduct = FVector::CrossProduct(TankForward, AIForwardIntention).Z;
-	IntendTurnRight(TankCrossProduct);
+	auto RightThrow = FVector::CrossProduct(TankForward, AIForwardIntention).Z;
+	IntendTurnRight(RightThrow);
 }
 
 void UTankMovementComponent::IntendMoveForward(float Throw)
