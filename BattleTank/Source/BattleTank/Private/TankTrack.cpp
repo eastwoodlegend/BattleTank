@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "BattleTank.h"
-#include "TankTrack.h"
+#include "Public/TankTrack.h"
 
 UTankTrack::UTankTrack()
 {
