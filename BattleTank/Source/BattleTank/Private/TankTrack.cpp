@@ -24,7 +24,6 @@ TArray<ASprungWheel*> UTankTrack::GetWheels() const
 		AActor* SpawnedChild = SpawnPointChild->GetSpawnedActor();
 		auto SprungWheel = Cast<ASprungWheel>(SpawnedChild);
 		if (!SprungWheel) continue;
-		UE_LOG(LogTemp, Warning, TEXT("Wheel Found"));
 		ResultArray.Add(SprungWheel);
 	}
 	return ResultArray;

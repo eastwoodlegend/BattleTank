@@ -21,11 +21,11 @@ void ATankAIController::SetPawn(APawn* InPawn)
 		if (!PossessedTank) { return; }
 
 		// Subscribe our local method to the tank's death event
-		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankAIController::OnPossedTankDeath);
+		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankAIController::OnPossessedTankDeath);
 	}
 }
 
-void ATankAIController::OnPossedTankDeath()
+void ATankAIController::OnPossessedTankDeath()
 {
 	if (!ensure(GetPawn())) { return; } // TODO remove if ok
 	GetPawn()->DetachFromControllerPendingDestroy();

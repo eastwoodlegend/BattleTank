@@ -8,6 +8,7 @@
 
 class UPhysicsConstraintComponent;
 class USphereComponent;
+class UPrimitiveComponent;
 
 UCLASS()
 class BATTLETANK_API ASprungWheel : public AActor
@@ -31,6 +32,11 @@ protected:
 private:
 	void SetupConstraint();
 
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+
+	void ApplyForce();
+
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	USphereComponent* Axle = nullptr;
 
@@ -42,4 +48,6 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	UPhysicsConstraintComponent* AxleWheelConstraint = nullptr;
+
+	float TotalForceMagnitudeThisFRame = 0;
 };
