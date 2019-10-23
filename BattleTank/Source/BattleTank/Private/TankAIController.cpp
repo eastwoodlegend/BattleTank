@@ -1,12 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "BattleTank.h"
-#include "Public/TankAimingComponent.h"
-#include "Public/TankAIController.h"
-#include "Tank.h"
+#include "TankAimingComponent.h"
+#include "TankAIController.h"
+#include "Tank.h" // So we can impliment OnDeath
+
 // Depends on movement component via pathfinding system
-
-
 
 void ATankAIController::BeginPlay()
 {
@@ -20,14 +19,15 @@ void ATankAIController::SetPawn(APawn* InPawn)
 	{
 		auto PossessedTank = Cast<ATank>(InPawn);
 		if (!PossessedTank) { return; }
-		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankAIController::OnPossessedTankDeath);
-	}
 
+		// Subscribe our local method to the tank's death event
+		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankAIController::OnPossedTankDeath);
+	}
 }
 
-void ATankAIController::OnPossessedTankDeath()
+void ATankAIController::OnPossedTankDeath()
 {
-	if (!(GetPawn())) { return; }
+	if (!ensure(GetPawn())) { return; } // TODO remove if ok
 	GetPawn()->DetachFromControllerPendingDestroy();
 }
 
@@ -40,7 +40,7 @@ void ATankAIController::Tick(float DeltaTime)
 	auto ControlledTank = GetPawn();
 
 	if (!(PlayerTank && ControlledTank)) { return; }
-	
+
 	// Move towards the player
 	MoveToActor(PlayerTank, AcceptanceRadius); // TODO check radius is in cm
 
